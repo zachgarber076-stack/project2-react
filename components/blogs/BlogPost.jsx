@@ -3,17 +3,16 @@ import Comments from "./Comments";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import axios from "axios";
+import { useAuth } from "../authWrapper/AuthContext";
 
 
 function BlogPost(){
     const params = useParams();
+    const {user} = useAuth();
 
     const [loading, setLoading] = useState(true);
     const [postData, setPostData] = useState();
     const [authorData, setAuthorData] = useState();
-    const [commentData, setCommentData] = useState();
-
-    console.log(postData);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -27,11 +26,6 @@ function BlogPost(){
                     `https://jsonplaceholder.typicode.com/users/${postRes.data.userId}`
                 );
                 setAuthorData(authorRes.data);
-
-                const commentRes = await axios.get(
-                    `https://jsonplaceholder.typicode.com/posts/${postRes.postId.id}/comments`
-                );
-                setCommentData(commentRes.data);
             }catch (e) {
                 console.log(e);
             } finally {
@@ -44,7 +38,7 @@ function BlogPost(){
     return (
         <div className="max-w-2xl mx-auto bg-white rounded-xl shadow-lg p-8 mt-8 mb-8">
             {loading ? (
-                <p>Loading</p>
+                <p>Loading...</p>
             ) : (
             <>
             <Content 
@@ -52,7 +46,20 @@ function BlogPost(){
                 content={postData.body} 
                 author={authorData.name} 
             />
-            <Comments />
+            {user ? (
+                <Comments />
+            ) : (
+                <p className="text-center mt-6 text-gray-600 text-lg">
+                    You must {" "}
+                    <a 
+                        href="/login"
+                        className="text-blue-600 underline font-semibold"
+                    >
+                        login
+                    </a>{" "}
+                    to write or view comments.
+                </p>
+            )}
             </>
             )}
         </div>

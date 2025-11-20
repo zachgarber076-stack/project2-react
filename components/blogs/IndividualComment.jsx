@@ -1,9 +1,12 @@
 function IndividualComment({value}) {
     console.log(value);
+    
+    
+
     return (
         <div className="border-b">
             <p>Name: {value.name}</p>
-            <p>"{value.content}"</p>
+            <p>"{value.body}"</p>
         </div>
     );
 }

@@ -24,11 +24,12 @@ function Comments(){
             body: comment.content
         }).then(res => {
             console.log(res);
-            setCommentList(prevList => [...prevList, {name: comment.name, content: comment.content}]);
+            setCommentList(prevList => [...prevList, {name: comment.name, body: comment.content}]);
             setComment({ name: '', content: ''});
         }).catch(err => console.error(err));
 
     };
+
 
     return(
         <div className="mt-8">
@@ -50,7 +51,7 @@ function Comments(){
             <button 
                 onClick={() => postComment(comment)}
                 type="submit"  
-                className="bg-amber-400 px-6 py-2 rounded-2xl text-white hover:bg-amber-600 transition mb-5">
+                className="bg-[#FDFD96] w-fit px-8 py-2 rounded-2xl hover:bg-[#FED06C] transition mb-5">
                 Submit
             </button>
             {commentList.length === 0 ? (<p className="text-center text-gray-600">No comments yet. Be the first to comment!</p>

@@ -14,10 +14,25 @@ function ContactPage() {
     return (
         <div className='p-4'>
             <form className='flex flex-col gap-2' onSubmit={submitForm}>
-                <input placeholder='Name' className={formClass} value={formInput.name} onChange={e => setFormInput({...formInput, name: e.target.value})}/>
-                <input placeholder='Email' className={formClass} value={formInput.email} onChange={e => setFormInput({...formInput, email: e.target.value})}/>
-                <textarea placeholder='Message' className={formClass} value={formInput.message} onChange={e => setFormInput({...formInput, message: e.target.value})}/>
-                <button type='submit' className='bg-blue-600 text-white p-2 rounded cursor-pointer hover:bg-blue-800 transition'>Submit</button>
+                <input 
+                    placeholder='Name' 
+                    className={formClass} 
+                    value={formInput.name} 
+                    onChange={e => setFormInput({...formInput, name: e.target.value})}
+                />
+                <input 
+                    placeholder='Email' 
+                    className={formClass} 
+                    value={formInput.email} 
+                    onChange={e => setFormInput({...formInput, email: e.target.value})}
+                />
+                <textarea 
+                    placeholder='Message' 
+                    className={formClass} 
+                    value={formInput.message} 
+                    onChange={e => setFormInput({...formInput, message: e.target.value})}
+                />
+                <button type='submit' className='bg-[#FDFD96] text-black p-2 rounded cursor-pointer hover:bg-[#FED06C] transition'>Submit</button>
             </form>
         </div>
     );
