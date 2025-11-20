@@ -1,7 +1,7 @@
 import Content from "./Content";
 import Comments from "./Comments";
 import { useEffect, useState } from "react";
-import { useParams } from "react-router";
+import { Link, useParams } from "react-router";
 import axios from "axios";
 import { useAuth } from "../authWrapper/AuthContext";
 
@@ -51,12 +51,11 @@ function BlogPost(){
             ) : (
                 <p className="text-center mt-6 text-gray-600 text-lg">
                     You must {" "}
-                    <a 
-                        href="/login"
-                        className="text-blue-600 underline font-semibold"
-                    >
+                    <Link   
+                        to='/login'
+                        className="text-blue-600 underline font-semibold">
                         login
-                    </a>{" "}
+                    </Link>{" "}
                     to write or view comments.
                 </p>
             )}
