@@ -2,21 +2,32 @@ import React, { useState, useEffect, useRef } from "react";
 import IndividualComment from "./IndividualComment";
 import { useParams } from "react-router";
 import axios from "axios";
+import { useAuth } from "../authWrapper/AuthContext";
+
 
 
 function Comments(){
     const params = useParams();
     console.log(params.post_id);
 
+    const {user} = useAuth();
+
     const [comment, setComment] = useState({
-        name: '',
+        name: user?.username || '',
         content: ''
     });
+
     console.log(comment);
 
     const [commentList, setCommentList] = useState([]);
 
     const textboxRef = useRef();
+
+    useEffect(() => {
+        if (user) {
+            setComment(prev => ({...prev, name:user.username}));
+        }
+    }, [user]);
 
     const postComment = () => {
         axios.post(`https://jsonplaceholder.typicode.com/posts/${params.post_id}/comments`, {
@@ -25,7 +36,7 @@ function Comments(){
         }).then(res => {
             console.log(res);
             setCommentList(prevList => [...prevList, {name: comment.name, body: comment.content}]);
-            setComment({ name: '', content: ''});
+            setComment(prev => ({ ...prev, content: ''}));
         }).catch(err => console.error(err));
 
     };
