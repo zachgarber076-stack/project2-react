@@ -13,7 +13,7 @@ function Login() {
         login(userData.username);
     }
     return (
-    <div className="max-w-96 m-12">
+    <div className="max-w-96 m-12 pb-24">
         <form className="flex flex-col gap-4" onSubmit={onSubmit}>
             <input
                 placeholder="Username"
